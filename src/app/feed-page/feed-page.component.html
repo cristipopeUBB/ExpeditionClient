@@ -1,0 +1,20 @@
+<div class="feed-container">
+  <div class="card" *ngFor="let expedition of expeditions" (click)="openEditModal(expedition.planetInfo)">
+    <div class="left-section">
+      <img [src]="'/assets/' + expedition.planetInfo.imagePath" alt="planet">
+      <div class="planet-name">{{ expedition.planetInfo.name }}</div>
+    </div>
+    <div class="right-section">
+      <div class="top-row">
+        <p class="planet-description">{{ expedition.planetInfo.description }}</p>
+        <div class="planet-status" [ngClass]="getStatusClass(expedition.planetInfo.status.toString())">{{ getStatusText(expedition.planetInfo.status.toString()) }}</div>
+      </div>
+      <div class="middle-row">
+        <div class="captain" *ngIf="expedition.captainName.length > 0"><b>by captain</b> {{ expedition.captainName }}</div>
+        <div class="robot-details" *ngIf="expedition.robotsDetails.length > 0 && expedition.robotsDetails[0] != ''"><b>Robots:</b> {{ expedition.robotsDetails.join(", ") }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-edit-planet *ngIf="showEditPlanetModal" [planetInfo]="selectedPlanetInfo" (save)="onSave($event)" (cancel)="onCancel()"></app-modal-edit-planet>

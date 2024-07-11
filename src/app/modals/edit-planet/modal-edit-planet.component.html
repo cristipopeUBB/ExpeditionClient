@@ -1,0 +1,19 @@
+<div class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="onCancel()">&times;</span>
+    <h2>Edit Your Planet</h2>
+    <form [formGroup]="editPlanetForm" (ngSubmit)="onSave()">
+      <label for="description">Description:</label>
+      <input id="description" type="text" formControlName="description" required>
+      <label for="status">Status:</label>
+      <select id="status" formControlName="status" required>
+        <option value="0">OK</option>
+        <option value="1">!OK</option>
+        <option value="2">To Do</option>
+        <option value="3">En route</option>
+      </select>
+      <button type="submit" [disabled]="editPlanetForm.invalid">Save</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
+    </form>
+  </div>
+</div>
